@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="image/logo.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="header">
+        <nav id="menus" class="navbar navbar-expand-lg">
+            <a href="index.html" class="tieudelogo"><img class="logomenu" src="images/logo.png"></a>
+            <button class="navbar-toggler btntoggle" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul id="navmain" class="navbar-nav me-auto mb-5 mb-lg-0">
+                <li class="nav-item"><a class="nav-link navlink" href="">Articles</a></li>
+                <li class="nav-item"><a class="nav-link navlink" href="">Videos</a></li>
+                <li class="nav-item"><a class="nav-link navlink" href="">Almanac</a></li>
+                <li class="nav-item"><a class="nav-link navlink" href="">Newsletter</a></li>
+                <li class="nav-item"><a class="nav-link navlink" href="">Guides</a></li>
+                <li class="nav-item"><a class="nav-link navlink" href="">DigitalOcean</a></li>
+                <li class="nav-item"><a class="nav-link navlink" href="">DO Community</a></li>
+            </ul>
+            <div id="dflex" class="d-flex">
+                <button data-bs-toggle="modal" data-bs-target="#staticBackdrop" class="btnsearchheader"><img src="images/search-icon.png" class="imgsearchicon"></button>
+            </div>
+            </div>
+        </nav>
+    </div>
+
+    <div class="contentmain">
+        <div class="contentindex">
+            <div id="listcategorydetail">
+                <span class="singcatedetail">locales</span>
+            </div>
+            <p class="titledetail" id="titledetail">Making Calendars With Accessibility and Internationalization in Mind</p>
+            <div class="authordetail">
+                <span id="authodetail">Mads Stoumann</span>
+                <span id="createdDatedetail" class="createdDatedetail">Mar 13, 2023</span>
+            </div>
+            <img src="images/blog1.png" class="imgdetail" id="imgdetail">
+
+
+            <div class="contentdetail col-9">
+                <p class="textdetail">I don’t want to re-create the wheel here, but I will show you how we can <br> get a dang good calendar with vanilla JavaScript. We’ll look into</p>
+                <p class="textdetail">internationalization and and formatting , using the Intl.Locale. <br> Intl.DateTimeFormat Intl.NumberFormat-APIs</p>
+                <p class="textdetail">In other words, we’re making a calendar… only without the extra <br>
+                dependencies you might typically see used in a tutorial like this, and with <br>
+                some of the nuances you might not typically see. And, in the process, I hope <br>
+                you’ll gain a new appreciation for newer things that JavaScript can <br>
+                do while getting an idea of the sorts of things that cross my mind when <br>
+                I’m putting something like this together.</p>
+                
+                <p class="detailbold">First off, naming</p>
+
+                <div class="Code">
+                    <code>
+                        <func>function</func> <fn>kalEl</fn> <nc>(</nc><va>setting</va> = <nc>{</nc><nc>}</nc> <nc>)</nc> <nc>{</nc>...<nc>}</nc>
+                        
+                    </code>
+                </div>
+
+                <br><p class="textdetail">
+                    <span>This method will render</span>
+                    <span>a single month</span>
+                    <span>. Later we’ll call this method from</span><br>
+                    <span>[...Array(12).keys()] to render an entire year.</span>
+                </p>
+                <div class="Code">
+                    <code>
+                        <func>const</func> <fn>today</fn> = <func>new</func> <fn>Date</fn><nc>(</nc><nc>)</nc>
+                        
+                    </code>
+                </div>
+                <br>
+                <p class="textdetail">Next, we’ll create a “configuration object” that we’ll merge with the optional
+                    <br>settings object of the primary method:
+                </p>
+
+                <div class="Code">
+                    <code>
+                    <pre>
+<func>const</func> <fn>config</fn> = <fn>Object.assign</fn><nc>(</nc>
+    <nc>{</nc>
+    <fn>today</fn>    <nc>:</nc> <nc>(</nc> <fn>document.documentElement.getAttribute</fn><nc>(</nc><func>'lang'</func><nc>)</nc> || <func>'en-US'</func></nc> <nc>),</nc>
+    <fn>day</fn>    <nc>:</nc> <nc>{</nc>
+            <nc>:</nc><fn>today .getDate</fn><nc>(),</nc>
+    <fn>month</fn>   <nc>:</nc><fn>today .getMonth</fn><nc>(),</nc>
+    <fn>year</fn>    <nc>:</nc><fn>today .getFullYear</fn><nc>(),</nc>
+        <nc>}</nc>
+    <nc>},</nc><fn>settings</fn>
+<nc>);</nc>
+                    </pre>
+                    </code>
+                </div>
+
+                <br>
+                <p>We check, if the root element (<code>< html ></code>) contains a lang -attribute with locale
+                <br>info; otherwise, we’ll fallback to using en-US . This is the first step toward</p>
+                <a href="" class="pointer">internationalizing the calendar</a>
+            </div>
+
+
+
+            <div class="row detailbotton">
+                <div class="col-sm-4">
+                    <div class="singledetailbottom">
+                        <span class="datedetail">December 1, 2017</span>
+                        <p class="titledet">24 Ways</p>
+                        <span class="desdetail">24 Ways, the advent calendar for web geeks, started up again this week. Throughout December they’ll be publishing a wide range of posts all about web design, CSS, and front-end development. Chen Hui Jing has already written a great post about feature queries and Stephanie Drescher published a post today…</span>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="singledetailbottom">
+                        <span class="datedetail">June 15, 2022</span>
+                        <p class="titledet">Conditionally Styling Selected Elements in a Grid Container</p>
+                        <span class="desdetail">Calendars, shopping carts, galleries, file explorers, and online libraries are some situations where selectable items are shown in grids (i.e. square lattices). You know, even those security checks that ask you to select all images with crosswalks or whatever. 🧐 I found a neat way to display selectable options in…</span>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="singledetailbottom">
+                        <span class="datedetail">June 29, 2020</span>
+                        <p class="titledet">Styling Layout Wrappers In CSS</p>
+                        <span class="desdetail">Two things that strike me often about the web are how many ways there are to go about the same thing and how many considerations go into even the most seemingly simple things. Working with wrapper elements is definitely on both those lists. Wrappers (or containers or whatever) are so…</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="footer">
+        <span class="footertile">CSS-Tricks is powered by <span class="bluetextfooter">DigitalOcean</span></span>
+        <div class="row listoptionfooter">
+            <div class="col-md-3">
+                <p class="uppercasefooter">DigitalOcean</p>
+                <a class="itemfooter" href="">DigitalOcean</a>
+                <a class="itemfooter" href="">DigitalOcean Community</a>
+                <a class="itemfooter" href="">About DigitalOcean</a>
+                <a class="itemfooter" href="">Legal</a>
+                <a class="itemfooter" href="">Free Credit Offer</a>
+            </div>
+            <div class="col-md-3">
+                <p class="uppercasefooter">CSS-Tricks</p>
+                <a class="itemfooter" href="">Email</a>
+                <a class="itemfooter" href="">Guest Writing</a>
+                <a class="itemfooter" href="">Book</a>
+                <a class="itemfooter" href="">Advertising</a>
+            </div>
+            <div class="col-md-3">
+                <p class="uppercasefooter">Follow</p>
+                <a class="itemfooter" href="">Mastodon</a>
+                <a class="itemfooter" href="">Twitter</a>
+                <a class="itemfooter" href="">Instagram</a>
+                <a class="itemfooter" href="">YouTube</a>
+            </div>
+            <div class="col-md-3">
+                <p class="uppercasefooter">&ThickSpace;</p>
+                <a class="itemfooter" href="">CodePen</a>
+                <a class="itemfooter" href="">iTunes</a>
+                <a class="itemfooter" href="">RSS</a>
+            </div>
+        </div>
+        <div class="contactfooter">
+            <span class="keepup">Keep up to date on web dev</span>
+            <span class="wout">with our hand-crafted newsletter</span>
+            <input type="text" class="formcontact" placeholder="Email address">
+        </div>
+    </div>
+
+
+    <!-- Modal -->
+<div class="modal fade" id="staticBackdrop" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" >
+      <div class="modal-content">
+        <div class="modal-header">
+          <input onkeyup="search()" type="text" id="param" class="inputsearch">
+          <button onclick="search()" class="btnsearchmodal"><img src="images/search-icon.png" class="imgsearch"></button>
+        </div>
+        <div class="modal-body">
+            <div class="listsearchitem" id="listsearchitem">
+                <!-- <a href="" class="singlesearchitem">
+                    <p class="titlesearch">Localisation and Translation on the Web</p>
+                    <span class="dessearch">Our comprehensive guide to CSS flexbox layout. This complete guide explains everything about flexbox, focusing on all the different possible properties for the parent element (the flex container) and the child elements (the flex items). It also includes history, demos, patterns, and a browser support javascript.</span>
+                </a> -->
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="script.js"></script>
+<script src="data.js"></script>
+<script>
+    $( document ).ready(function() {
+        loadDetail();
+    });
+</script>
+</html>
